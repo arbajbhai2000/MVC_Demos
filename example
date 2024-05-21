@@ -1,0 +1,26 @@
+// Controllers/HomeController.cs
+using Microsoft.AspNetCore.Mvc;
+using MyMvcApp.Models;
+
+namespace MyMvcApp.Controllers
+{
+    public class HomeController : Controller
+    {
+        private static ItemModel _itemModel = new ItemModel();
+
+        public IActionResult Index()
+        {
+            return View(_itemModel);
+        }
+
+        [HttpPost]
+        public IActionResult AddItem(string item)
+        {
+            if (!string.IsNullOrEmpty(item))
+            {
+                _itemModel.AddItem(item);
+            }
+            return RedirectToAction("Index");
+        }
+    }
+}
