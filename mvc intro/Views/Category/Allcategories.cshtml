@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Allcategories";
+}
+
+<h2>Allcategories</h2>
+
+ 
+<table>
+
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Is Available</th>
+    </tr>
+
+    <tr>
+        <td>1</td>
+        <td>Shirts</td>
+        <td>Yes</td>
+    </tr>
+
+    <tr>
+        <td>2</td>
+        <td>Home Applainces</td>
+        <td>Noo</td>
+    </tr>
+
+</table>
+
+<hr />
+
+@{ 
+    int i = 10, j = 5;
+    int c = i + j;
+    <p>@i + @j=@c </p>
+}
+
+@{ 
+    List<string> categories = new List<string>()
+    {
+       "Men", "Women","Kids"
+    };
+
+    <ul>
+        @foreach( string s in categories)
+            {
+            <li>@s</li>
+            }
+    </ul>
+}
