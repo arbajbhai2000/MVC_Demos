@@ -1,0 +1,40 @@
+﻿@using _2_ViewsInMVC.Models
+ @model _2_ViewsInMVC.Models.Product
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm())
+        {
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Id, new { @class = "form-label" })
+                @Html.EditorFor(model => model.Id, new { @class = "form-Control" })
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, new { @class = "form-label" })
+                @Html.EditorFor(model => model.Name, new { @class = "form-Control" })
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Price, new { @class = "form-label" })
+                @Html.EditorFor(model => model.Price, new { @class = "form-Control" })
+
+            </div>
+
+            <div>
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+
+        }
+    </div>
+</body>
+</html>

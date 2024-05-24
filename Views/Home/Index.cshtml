@@ -1,0 +1,45 @@
+﻿
+@*@using _2_ViewsInMVC.Common*@
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <h2>Index view Content</h2>
+        @*<input type="text" /><input type="button" value="submit" />
+        <hr />
+        @Html.TextBox("txtName")
+        <br />
+        @Html.Password("txtPassword")
+        <br />
+        @Html.TextArea("txtAddress")
+        <br />
+        @Html.ActionLink("open Index2", "Index2")
+        <br />
+        @Html.Button("button", "click me!!")
+        @Html.Button("submit", "LogIn")*@
+
+        @Html.ActionLink("open Index2", "Index2")
+        <p>Data From View Data : @ViewData["name"]</p>
+        <p>Data From View Data : @ViewData["name"].ToString().ToUpper()</p>
+        <p>Data From Viewbag : @ViewBag.Email</p>
+        <p>Data From Viewbag ToUpper : @ViewBag.Email.ToUpper()</p>
+
+        <p>Accessing viewdata using viewbag : @ViewBag.name</p>
+        <p>Accessing ViewBag using ViewData : @ViewData["Email"]</p>
+        <p>TempData : @TempData["Address"]</p>
+        <p>TempData In Upper : @TempData["Address"].ToString().ToUpper()</p>
+
+    </div>
+</body>
+</html>
