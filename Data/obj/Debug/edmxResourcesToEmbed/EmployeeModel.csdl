@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmployeeAssignmentDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="DistrictId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="District" Relationship="Self.FK__City__DistrictId__4E88ABD4" FromRole="City" ToRole="District" />
+    <NavigationProperty Name="employees" Relationship="Self.FK__employee__CityId__5165187F" FromRole="City" ToRole="employee" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="DistrictId" />
+    </Key>
+    <Property Name="DistrictId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DistrictName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StateId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cities" Relationship="Self.FK__City__DistrictId__4E88ABD4" FromRole="District" ToRole="City" />
+    <NavigationProperty Name="state" Relationship="Self.FK__District__StateI__4BAC3F29" FromRole="District" ToRole="state" />
+  </EntityType>
+  <EntityType Name="employee">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Mobile" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="7" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="7" />
+    <Property Name="CityId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="City" Relationship="Self.FK__employee__CityId__5165187F" FromRole="employee" ToRole="City" />
+  </EntityType>
+  <EntityType Name="state">
+    <Key>
+      <PropertyRef Name="StateId" />
+    </Key>
+    <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Statename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Districts" Relationship="Self.FK__District__StateI__4BAC3F29" FromRole="state" ToRole="District" />
+  </EntityType>
+  <Association Name="FK__City__DistrictId__4E88ABD4">
+    <End Role="District" Type="Self.District" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="DistrictId" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="DistrictId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__employee__CityId__5165187F">
+    <End Role="City" Type="Self.City" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="employee" Type="Self.employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="employee">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__District__StateI__4BAC3F29">
+    <End Role="state" Type="Self.state" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="District" Type="Self.District" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="state">
+        <PropertyRef Name="StateId" />
+      </Principal>
+      <Dependent Role="District">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EmployeeAssignmentDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cities" EntityType="Self.City" />
+    <EntitySet Name="Districts" EntityType="Self.District" />
+    <EntitySet Name="employees" EntityType="Self.employee" />
+    <EntitySet Name="states" EntityType="Self.state" />
+    <AssociationSet Name="FK__City__DistrictId__4E88ABD4" Association="Self.FK__City__DistrictId__4E88ABD4">
+      <End Role="District" EntitySet="Districts" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK__employee__CityId__5165187F" Association="Self.FK__employee__CityId__5165187F">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="employee" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__District__StateI__4BAC3F29" Association="Self.FK__District__StateI__4BAC3F29">
+      <End Role="state" EntitySet="states" />
+      <End Role="District" EntitySet="Districts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
