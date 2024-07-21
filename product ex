@@ -1,0 +1,65 @@
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+}
+using System.Collections.Generic;
+using System.Web.Mvc;
+using MvcExample.Models;
+
+public class ProductController : Controller
+{
+    // A static list to simulate a database
+    private static List<Product> products = new List<Product>
+    {
+        new Product { Id = 1, Name = "Laptop", Price = 999.99M },
+        new Product { Id = 2, Name = "Smartphone", Price = 499.99M },
+        new Product { Id = 3, Name = "Tablet", Price = 299.99M }
+    };
+
+    // GET: Product
+    public ActionResult Index()
+    {
+        return View(products);
+    }
+
+    // GET: Product/Details/5
+    public ActionResult Details(int id)
+    {
+        var product = products.Find(p => p.Id == id);
+        if (product == null)
+        {
+            return HttpNotFound();
+        }
+        return View(product);
+    }
+}
+@model IEnumerable<MvcExample.Models.Product>
+
+@{
+    ViewBag.Title = "Product List";
+}
+
+<h2>Product List</h2>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+        <td>@Html.DisplayFor(modelItem => item.Price)</td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>
