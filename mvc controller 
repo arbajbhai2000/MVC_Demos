@@ -1,0 +1,43 @@
+using System.Collections.Generic;
+using System.Web.Mvc;
+using YourNamespace.Models;
+
+public class ProductsController : Controller
+{
+    public ActionResult Index()
+    {
+        var products = new List<Product>
+        {
+            new Product { Id = 1, Name = "Laptop", Price = 1200.00M },
+            new Product { Id = 2, Name = "Smartphone", Price = 800.00M },
+            new Product { Id = 3, Name = "Tablet", Price = 300
+@model IEnumerable<YourNamespace.Models.Product>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products List</title>
+</head>
+<body>
+    <h1>Products</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
