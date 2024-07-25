@@ -1,0 +1,35 @@
+using System.Web.Mvc;
+using MvcHelloWorld.Models;
+
+namespace MvcHelloWorld.Controllers
+{
+    public class HelloWorldController : Controller
+    {
+        public ActionResult Index()
+        {
+            var model = new HelloWorldModel
+            {
+                Message = "Hello, World!"
+            };
+            return View(model);
+        }
+    }
+}
+@model MvcHelloWorld.Models.HelloWorldModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HelloWorld</title>
+</head>
+<body>
+    <h1>@Model.Message</h1>
+</body>
+</html>
+namespace MvcHelloWorld.Models
+{
+    public class HelloWorldModel
+    {
+        public string Message { get; set; }
+    }
+}
